@@ -45,13 +45,13 @@ class Scene extends THREE.Scene {
         'use strict';
         switch (e.keyCode) {
         case 37: //esquerda
-            this.plane.rotateYY(-1);
+            this.plane.rotateYY(1);
             break;
         case 38: //cima
             this.plane.rotateXX(1);
             break;
         case 39: //direita
-            this.plane.rotateYY(1);
+            this.plane.rotateYY(-1);
             break;
         case 40: //baixo
             this.plane.rotateXX(-1);
