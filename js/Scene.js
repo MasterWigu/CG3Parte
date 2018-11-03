@@ -5,9 +5,10 @@ class Scene extends THREE.Scene {
     createScene() {
         'use strict';
 
-        this.add(new THREE.AxisHelper(10));
+        //this.add(new THREE.AxisHelper(10));
 
-        this.add(new Plane());
+        this.plane = new Plane();
+        this.add(this.plane);
 
     }
     
@@ -43,6 +44,19 @@ class Scene extends THREE.Scene {
     onKeyDown(e) {
         'use strict';
         switch (e.keyCode) {
+        case 37: //esquerda
+            this.plane.rotateYY(-1);
+            break;
+        case 38: //cima
+            this.plane.rotateXX(1);
+            break;
+        case 39: //direita
+            this.plane.rotateYY(1);
+            break;
+        case 40: //baixo
+            this.plane.rotateXX(-1);
+            break;
+
         case 49:
             //this.activeCamera = 1;
             break;
