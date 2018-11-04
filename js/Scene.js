@@ -10,6 +10,8 @@ class Scene extends THREE.Scene {
         this.plane = new Plane();
         this.add(this.plane);
 
+        this.add(new DirectLight());
+
     }
     
     createCamera() { /* 1 CAMARA PERSPETIVA */
@@ -105,8 +107,7 @@ class Scene extends THREE.Scene {
         });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(this.renderer.domElement);
-       
-
+        
         this.createScene();
         this.createCamera();
         
