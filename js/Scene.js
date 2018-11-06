@@ -30,7 +30,8 @@ class Scene extends THREE.Scene {
         this.distance = 10;
 
         //Camera temporaria movível
-        this.camera = new THREE.PerspectiveCamera(70,
+        
+        this.camera = new THREE.PerspectiveCamera(30,
                                          window.innerWidth / window.innerHeight,
                                          1,
                                          100000000);
@@ -38,7 +39,19 @@ class Scene extends THREE.Scene {
         this.camera.position.y = 125;
         this.camera.position.z = 125;
         this.camera.lookAt(this.position);
-
+        /*
+        this.distance = 10;
+        this.camera = new THREE.OrthographicCamera(-window.innerWidth / this.distance,
+                                                    window.innerWidth / this.distance,
+                                                    window.innerHeight / this.distance,
+                                                    -window.innerHeight / this.distance, 
+                                                    1, 
+                                                    1000);
+        this.camera.position.x = 0;
+        this.camera.position.y = 50;
+        this.camera.position.z = 0;
+        this.camera.lookAt(this.position);
+        */
     }
 
     onResize() { /* CORRIGIR VER PEDREIRA */
@@ -79,6 +92,15 @@ class Scene extends THREE.Scene {
             break;
         case 52: //para a lampada 4
             this.lamp4.turnOnOff();
+            break;
+        case 76: //L
+            this.direct.turnShadow();
+            break;
+        case 71: //G
+            this.plane.changeMaterial();
+            break;
+        case 78: //N
+            this.direct.turnOnOff();
             break;
 
         case 78:

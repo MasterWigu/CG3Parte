@@ -43,7 +43,7 @@ class Plane extends THREE.Scene {
 		geo.computeFaceNormals();
 		geo.computeVertexNormals();
 
-		var material = new THREE.MeshLambertMaterial({ color:0x00FF00, wireframe: false });
+		var material = new THREE.MeshLambertMaterial({ color:0xFF0000, wireframe: false });
 		var mesh = new THREE.Mesh(geo, material);
         mesh.position.set(x, y, z);
         this.add(mesh);
@@ -86,7 +86,7 @@ class Plane extends THREE.Scene {
 		geo.computeFaceNormals();
 		geo.computeVertexNormals();
 
-		var material = new THREE.MeshLambertMaterial({ color:0x00FF00, wireframe: false });
+		var material = new THREE.MeshLambertMaterial({ color:0xFF0000, wireframe: false });
 		var mesh = new THREE.Mesh(geo, material);
         mesh.position.set(x, y, z);
         this.add(mesh);
@@ -129,7 +129,7 @@ class Plane extends THREE.Scene {
 		geo.computeFaceNormals();
 		geo.computeVertexNormals();
 
-		var material = new THREE.MeshLambertMaterial({ color:0x00FF00, wireframe: false });
+		var material = new THREE.MeshLambertMaterial({ color:0xFF0000, wireframe: false });
 		var mesh = new THREE.Mesh(geo, material);
         mesh.position.set(x, y, z);
         this.add(mesh);
@@ -172,7 +172,7 @@ class Plane extends THREE.Scene {
 		geo.computeFaceNormals();
 		geo.computeVertexNormals();
 
-		var material = new THREE.MeshLambertMaterial({ color:0x00FF00, wireframe: false });
+		var material = new THREE.MeshLambertMaterial({ color:0xFF0000, wireframe: false });
 		var mesh = new THREE.Mesh(geo, material);
         mesh.position.set(x, y, z);
         this.add(mesh);
@@ -207,7 +207,7 @@ class Plane extends THREE.Scene {
 		geo.computeFaceNormals();
 		geo.computeVertexNormals();
 
-		var material = new THREE.MeshLambertMaterial({ color:0x00FFFF, wireframe: false });
+		var material = new THREE.MeshLambertMaterial({ color:0xFF0000, wireframe: false });
 		var mesh = new THREE.Mesh(geo, material);
         mesh.position.set(x, y, z);
         this.add(mesh);
@@ -358,11 +358,15 @@ class Plane extends THREE.Scene {
 
     changeMaterial() {
     	var i;
-    	for (i=0; i < this.geos.lenght(); i++) {
-    		if (this.mat == 1)
+    	if (this.mat == 1) {
+    		for (i=0; i < this.geos.length; i++)
     			this.geos[i].material = new THREE.MeshLambertMaterial({ color:0xFF0000, wireframe: false });
-    		else
+    		this.mat = 0;
+    	}
+    	else {
+    		for (i=0; i < this.geos.length; i++)
     			this.geos[i].material = new THREE.MeshPhongMaterial({ color:0xFF0000, wireframe: false });
+    		this.mat = 1;
     	}
     }
 
