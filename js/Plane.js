@@ -10,7 +10,7 @@ class Plane extends THREE.Scene {
 
 	makeWingR(x, y, z) { /* dir = -1 ou 1 em funcao da asa da sesquerda ou da direita */
 		var geo = new THREE.Geometry();
-		
+
 		//adiciona o vertice a "lista"
 		geo.vertices.push(new THREE.Vector3(0,0,0));
 		geo.vertices.push(new THREE.Vector3(0,4,0));
@@ -53,7 +53,7 @@ class Plane extends THREE.Scene {
 
 	makeWingL(x, y, z) { /* = -1 ou 1 em funcao da asa da sesquerda ou da ita */
 		var geo = new THREE.Geometry();
-		
+
 		//adiciona o vertice a "lista"
 		geo.vertices.push(new THREE.Vector3(-0,0,0));
 		geo.vertices.push(new THREE.Vector3(-0,4,0));
@@ -96,7 +96,7 @@ class Plane extends THREE.Scene {
 
 	makeHStabL(x, y, z) { /* dir = -1 ou 1 em funcao da asa da sesquerda ou da direita */
 		var geo = new THREE.Geometry();
-		
+
 		//adiciona o vertice a "lista"
 		geo.vertices.push(new THREE.Vector3(0, -0.5, 0));
 		geo.vertices.push(new THREE.Vector3(0, 0.5, 0));
@@ -139,7 +139,7 @@ class Plane extends THREE.Scene {
 
 	makeHStabR(x, y, z) { /* dir = -1 ou 1 em funcao da asa da sesquerda ou da direita */
 		var geo = new THREE.Geometry();
-		
+
 		//adiciona o vertice a "lista"
 		geo.vertices.push(new THREE.Vector3(0, -0.5, 0));
 		geo.vertices.push(new THREE.Vector3(0, 0.5, 0));
@@ -336,7 +336,7 @@ class Plane extends THREE.Scene {
 		geo.vertices.push(new THREE.Vector3(4,3,15));
 		geo.vertices.push(new THREE.Vector3(0,0,30));
 		geo.vertices.push(new THREE.Vector3(4,0,30));
-		
+
 		geo.faces.push(new THREE.Face3(0,2,1));
 		geo.faces.push(new THREE.Face3(1,2,3));
 		geo.faces.push(new THREE.Face3(2,4,3));
