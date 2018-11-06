@@ -7,11 +7,6 @@ class DirectLight extends THREE.DirectionalLight {
 			this.intensity = 1;
 	}
 
-	turnShadow() {
-		this.castShadow = !this.castShadow;
-	}
-
-
 	constructor() {
 		'use strict';
 

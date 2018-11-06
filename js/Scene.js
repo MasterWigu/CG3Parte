@@ -27,7 +27,6 @@ class Scene extends THREE.Scene {
 
     createCamera() { /* 1 CAMARA PERSPETIVA */
         'use strict';
-        this.distance = 10;
 
         //Camera temporaria movível
         
@@ -56,12 +55,11 @@ class Scene extends THREE.Scene {
 
     onResize() { /* CORRIGIR VER PEDREIRA */
         'use strict';
-
-        this.camera.aspect = window.innerWidth / window.innerHeight;
-        this.camera.updateProjectionMatrix();
-
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-
+        if (window.innerHeight > 0 && window.innerWidth > 0) {
+            this.camera.aspect = window.innerWidth / window.innerHeight;
+            this.camera.updateProjectionMatrix();
+            this.renderer.setSize(window.innerWidth, window.innerHeight);
+        }
     }
 
 
@@ -94,34 +92,21 @@ class Scene extends THREE.Scene {
             this.lamp4.turnOnOff();
             break;
         case 76: //L
-            this.direct.turnShadow();
+            this.plane.turnOnOffIllumination();
             break;
         case 71: //G
             this.plane.changeMaterial();
             break;
         case 78: //N
-            this.direct.turnOnOff();
-            break;
-
-        case 78:
             this.directLight.turnOnOff();
             break;
         case 65: //A
         case 97: //a
-            this.lamp1.lampMaterial.wireframe = !this.lamp1.lampMaterial.wireframe;
-            this.lamp1.baseMaterial.wireframe = !this.lamp1.baseMaterial.wireframe;
-            this.lamp2.lampMaterial.wireframe = !this.lamp2.lampMaterial.wireframe;
-            this.lamp2.baseMaterial.wireframe = !this.lamp2.baseMaterial.wireframe;
-            this.lamp3.lampMaterial.wireframe = !this.lamp3.lampMaterial.wireframe;
-            this.lamp3.baseMaterial.wireframe = !this.lamp3.baseMaterial.wireframe;
-            this.lamp4.lampMaterial.wireframe = !this.lamp4.lampMaterial.wireframe;
-            this.lamp4.baseMaterial.wireframe = !this.lamp4.baseMaterial.wireframe;
-
-            /*this.screen.wallMaterial.wireframe = !this.screen.wallMaterial.wireframe;
-            this.screen.floorMaterial.wireframe = !this.screen.floorMaterial.wireframe;
-            for (var i = 0; i < this.ballVector.length; i++) {
-                this.ballVector[i].material.wireframe = !this.ballVector[i].material.wireframe;
-            }*/
+            this.lamp1.changeWireframe();
+            this.lamp2.changeWireframe();
+            this.lamp3.changeWireframe();
+            this.lamp4.changeWireframe();
+            this.plane.changeWireframe();
             break;
         case 69:  //E
         case 101: //e

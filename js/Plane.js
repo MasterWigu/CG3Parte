@@ -43,7 +43,7 @@ class Plane extends THREE.Scene {
 		geo.computeFaceNormals();
 		geo.computeVertexNormals();
 
-		var material = new THREE.MeshLambertMaterial({ color:0xFF0000, wireframe: false });
+		var material = this.bodyMats[1];
 		var mesh = new THREE.Mesh(geo, material);
         mesh.position.set(x, y, z);
         this.add(mesh);
@@ -86,7 +86,7 @@ class Plane extends THREE.Scene {
 		geo.computeFaceNormals();
 		geo.computeVertexNormals();
 
-		var material = new THREE.MeshLambertMaterial({ color:0xFF0000, wireframe: false });
+		var material = this.bodyMats[1];
 		var mesh = new THREE.Mesh(geo, material);
         mesh.position.set(x, y, z);
         this.add(mesh);
@@ -129,7 +129,7 @@ class Plane extends THREE.Scene {
 		geo.computeFaceNormals();
 		geo.computeVertexNormals();
 
-		var material = new THREE.MeshLambertMaterial({ color:0xFF0000, wireframe: false });
+		var material = this.bodyMats[1];
 		var mesh = new THREE.Mesh(geo, material);
         mesh.position.set(x, y, z);
         this.add(mesh);
@@ -172,7 +172,7 @@ class Plane extends THREE.Scene {
 		geo.computeFaceNormals();
 		geo.computeVertexNormals();
 
-		var material = new THREE.MeshLambertMaterial({ color:0xFF0000, wireframe: false });
+		var material = this.bodyMats[1];
 		var mesh = new THREE.Mesh(geo, material);
         mesh.position.set(x, y, z);
         this.add(mesh);
@@ -207,7 +207,7 @@ class Plane extends THREE.Scene {
 		geo.computeFaceNormals();
 		geo.computeVertexNormals();
 
-		var material = new THREE.MeshLambertMaterial({ color:0xFF0000, wireframe: false });
+		var material = this.bodyMats[1];
 		var mesh = new THREE.Mesh(geo, material);
         mesh.position.set(x, y, z);
         this.add(mesh);
@@ -263,7 +263,7 @@ class Plane extends THREE.Scene {
 		geo.computeFaceNormals();
 		geo.computeVertexNormals();
 
-		var material = new THREE.MeshLambertMaterial({ color:0xFF0000, wireframe: false });
+		var material = this.bodyMats[1];
 		var mesh = new THREE.Mesh(geo, material);
         mesh.position.set(x, y, z);
         this.add(mesh);
@@ -319,7 +319,7 @@ class Plane extends THREE.Scene {
 		geo.computeFaceNormals();
 		geo.computeVertexNormals();
 
-		var material = new THREE.MeshLambertMaterial({ color:0xFF0000, wireframe: false });
+		var material = this.bodyMats[1];
 		var mesh = new THREE.Mesh(geo, material);
         mesh.position.set(x, y, z);
         this.add(mesh);
@@ -349,25 +349,61 @@ class Plane extends THREE.Scene {
 		geo.computeFaceNormals();
 		geo.computeVertexNormals();
 
-		var material = new THREE.MeshStandardMaterial({ color:0x0000FF, wireframe: false });
+		var material = this.cockpitMats[1]
 		var mesh = new THREE.Mesh(geo, material);
         mesh.position.set(x, y, z);
+        this.cockpit = mesh;
         this.add(mesh);
+
     }
 
 
     changeMaterial() {
     	var i;
+    	if (this.illumination == 0) //se o calculo de iluminacao estiver desligado, nao muda nada
+    		return;
+
+
     	if (this.mat == 1) {
     		for (i=0; i < this.geos.length; i++)
-    			this.geos[i].material = new THREE.MeshLambertMaterial({ color:0xFF0000, wireframe: false });
+    			this.geos[i].material = this.bodyMats[0];
     		this.mat = 0;
+    		this.cockpit.material = this.cockpitMats[0];
     	}
     	else {
     		for (i=0; i < this.geos.length; i++)
-    			this.geos[i].material = new THREE.MeshPhongMaterial({ color:0xFF0000, wireframe: false });
+    			this.geos[i].material = this.bodyMats[1];
     		this.mat = 1;
+    		this.cockpit.material = this.cockpitMats[1];
     	}
+
+    }
+
+    turnOnOffIllumination() {
+    	var i;
+    	if (this.illumination == 1) {
+    		for (i=0; i < this.geos.length; i++)
+    			this.geos[i].material = this.bodyMats[2];
+    		this.illumination = 0;
+    		this.cockpit.material = this.cockpitMats[2];
+    	}
+    	else {
+    		for (i=0; i < this.geos.length; i++)
+    			this.geos[i].material = this.bodyMats[this.mat];
+    		this.illumination = 1;
+    		this.cockpit.material = this.cockpitMats[this.mat];
+    	}
+
+    }
+
+    changeWireframe() {
+    	var i;
+    	for (i=0; i < this.bodyMats.length; i++) {
+    		this.bodyMats[i].wireframe = !this.bodyMats[i].wireframe;
+    	} 
+    	for (i=0; i < this.cockpitMats.length; i++) {
+    		this.cockpitMats[i].wireframe = !this.cockpitMats[i].wireframe;
+    	} 
     }
 
 
@@ -378,7 +414,10 @@ class Plane extends THREE.Scene {
 		super();
 
 		this.geos = []
-		this.mat = 0;
+		this.bodyMats = [new THREE.MeshLambertMaterial({ color:0xFF0000, wireframe: false }), new THREE.MeshPhongMaterial({ color:0xFF0000, wireframe: false }), new THREE.MeshBasicMaterial({ color:0xFF0000, wireframe: false })];
+		this.cockpitMats = [new THREE.MeshLambertMaterial({ color:0x0000FF, wireframe: false, roughness: 0, metalness: 0 }), new THREE.MeshStandardMaterial({ color:0x0000FF, wireframe: false, roughness: 0, metalness: 0 }), new THREE.MeshBasicMaterial({ color:0x0000FF, wireframe: false })];
+		this.mat = 1;
+		this.illumination = 1;
 
 		this.add(new THREE.AxisHelper(20));
 
@@ -389,7 +428,7 @@ class Plane extends THREE.Scene {
 		this.makeCockpit(-2, 5, -25);
 		this.makeHStabL(0, 0, 30);
 		this.makeHStabR(0, 0, 30);
-		this.makeVStab(-0.25, 0, 30);
+		this.makeVStab(0, 0, 30);
 
 	}
 
